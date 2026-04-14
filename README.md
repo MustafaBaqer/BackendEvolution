@@ -73,6 +73,8 @@
 <hr style="border: 0; height: 1px; background: linear-gradient(90deg, transparent, #333, transparent);" />
 
 <div align="center" style="margin-top: 20px;">
+  <img src="BackendEvolution.jpg" alt="BACKEND EVOLUTION" />
+  <br />
   <p style="color: #9CA3AF; font-size: 0.9rem; font-family: sans-serif;">
     Visit the definitive architectural guide at <a href="https://backendevolution.com" style="color: #BB86FC; text-decoration: none; font-weight: bold;">backendevolution.com</a>
     <br /><br />
