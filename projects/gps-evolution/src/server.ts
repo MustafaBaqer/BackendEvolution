@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { NaiveIngestionController } from "./api/controllers/ingestion.controller.js";
+import { Database } from "./infrastructure/db.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,9 +28,10 @@ const server = app.listen(PORT, () => {
 });
 
 // Graceful Shutdown
-process.on("SIGTERM", () => {
+process.on("SIGTERM", async () => {
   console.log("[VestraNet] SIGTERM received. Shutting down gracefully...");
-  server.close(() => {
+  server.close(async () => {
+    await Database.closeDown();
     process.exit(0);
   });
 });
