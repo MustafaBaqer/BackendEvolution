@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Custom styles for IDE code blocks --- */
+figure[data-rehype-pretty-code-figure] {
+    @apply relative mt-6 mb-8 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800/80 shadow-lg dark:shadow-2xl;
+}
+
+/* macOS header with 3-color buttons */
+figure[data-rehype-pretty-code-figure]::before {
+    content: "";
+    @apply block w-full h-11 bg-slate-100/80 dark:bg-white/5 backdrop-blur-md border-b border-slate-200 dark:border-white/10;
+}
+
+figure[data-rehype-pretty-code-figure]::after {
+    content: "";
+    @apply absolute top-4 left-4 w-3 h-3 rounded-full bg-[#ff5f56] shadow-[1.25rem_0_0_#ffbd2e,_2.5rem_0_0_#27c93f];
+}
+
+/* --- Syntax Highlighting Engine (Dual-Theme) --- */
+figure[data-rehype-pretty-code-figure] span {
+    color: var(--shiki-light);
+    transition: color 0.3s ease;
+}
+
+.dark figure[data-rehype-pretty-code-figure] span {
+    color: var(--shiki-dark);
+}
+
+/* --- Comment Optimization (IDE Feel) --- */
+/* Targeting the specific HEX codes of comments in GitHub themes */
+figure[data-rehype-pretty-code-figure] span[style*="--shiki-light:#6A737D"],
+figure[data-rehype-pretty-code-figure] span[style*="--shiki-light:#6a737d"],
+figure[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#768390"] {
+    @apply italic opacity-70 font-light tracking-wide;
+}
+
+/* --- Code Block Title (File Name / Route) --- */
+figure[data-rehype-pretty-code-figure] [data-rehype-pretty-code-title] {
+    @apply absolute top-0 left-0 w-full h-11 flex items-center justify-center text-[13px] font-mono tracking-wide text-slate-500 dark:text-slate-400 z-10 cursor-default select-none pointer-events-none;
+}
+
+figure[data-rehype-pretty-code-figure]:has([data-rehype-pretty-code-title]) pre {
+    @apply pt-12;
+}
+
+/* Settings inside the code block */
+figure[data-rehype-pretty-code-figure] pre {
+    @apply overflow-x-auto py-5 px-4 text-[14px] leading-loose;
+}
+
+figure[data-rehype-pretty-code-figure] pre::-webkit-scrollbar {
+    @apply h-1.5;
+}
+
+figure[data-rehype-pretty-code-figure] pre::-webkit-scrollbar-track {
+    @apply bg-transparent my-2;
+}
+
+figure[data-rehype-pretty-code-figure] pre::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-white/10 rounded-full transition-colors;
+}
+
+figure[data-rehype-pretty-code-figure] pre::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400 dark:bg-white/20;
+}
+
+figure[data-rehype-pretty-code-figure] code {
+    @apply grid min-w-full w-max break-normal;
+    counter-reset: line;
+}
+
+figure[data-rehype-pretty-code-figure] code>[data-line] {
+    @apply w-full;
+}
+
+/* Code line numbering (optional and very professional) */
+figure[data-rehype-pretty-code-figure] code>[data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    @apply inline-block w-4 mr-6 text-right text-slate-400 dark:text-slate-600 select-none;
+}
+
+blockquote p {
+    margin-bottom: 0 !important;
+    line-height: 1.8;
+}
